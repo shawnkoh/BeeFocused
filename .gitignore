@@ -1,5 +1,5 @@
+### MacOS ###
 .DS_Store
-log.txt
 
 ### VisualStudioCode ###
 .vscode/*
@@ -12,3 +12,8 @@ log.txt
 .history
 .ionide
 
+### BeeFocused ###
+.env
+log.txt
+
+__pycache__/

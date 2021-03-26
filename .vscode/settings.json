@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/shawnkoh/Library/Caches/pypoetry/virtualenvs/beefocused-SPJbzgTC-py3.9/bin/python"
+    "python.venvPath": "~/Library/Caches/pypoetry/virtualenvs",
+    "python.pythonPath": ".venv/bin/python",
 }

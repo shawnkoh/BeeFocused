@@ -1,23 +1,24 @@
-import subprocess
 import os
 
 from enum import Enum
 from typing import NamedTuple
 from operator import itemgetter
 
-# CHANGE TO YOUR DIRECTORY
+import beeminder
+import notifier
+
+from dotenv import load_dotenv
+
+# CONFIG
+
+load_dotenv()
+beeminder.username = os.getenv("USERNAME")
+# Retrieved from https://www.beeminder.com/api/v1/auth_token.json
+beeminder.auth_token = os.getenv("AUTH_TOKEN")
+# The location of where your log file should be.
 LOG_DIRECTORY = os.path.expanduser("~/repos/BeeFocused/log.txt")
-
-# Helper to display a notification on MacOS via AppleScript.
-# Credit: https://stackoverflow.com/questions/17651017/python-post-osx-notification
-CMD = '''
-on run argv
-  display notification (item 2 of argv) with title (item 1 of argv)
-end run
-'''
-
-def notify(title, text):
-  subprocess.call(['osascript', '-e', CMD, title, text])
+# The Beeminder goal that you want to automatically update.
+GOAL = "test"
 
 # The log order produced by the bash scripts are not deterministic because Focus does not always execute the custom events in order.
 class Action(Enum):
@@ -86,6 +87,13 @@ for event in events:
 if not started():
     quit()
 
-# POST to Beeminder's API
+duration = work_duration()
 
-notify("BeeFocused", f"Uploaded to Beeminder {work_duration()}")
+minutes, seconds = divmod(duration, 60)
+hours, minutes = divmod(minutes, 60)
+
+value = duration / 60 / 60
+
+beeminder.create_datapoint(GOAL, value, "Auto-entered via BeeFocused")
+
+notifier.notify("BeeFocused", f"Focused for {hours}h {minutes}m {seconds}s. Uploaded to Beeminder.")
