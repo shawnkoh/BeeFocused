@@ -1,13 +1,12 @@
 """Script that integrates Focus with Beeminder."""
 import os
-
 from enum import Enum
 from typing import NamedTuple
 
+from dotenv import load_dotenv
+
 import beeminder
 import notifier
-
-from dotenv import load_dotenv
 
 # CONFIG
 
