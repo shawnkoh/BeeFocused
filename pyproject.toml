@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.9"
 requests = "^2.25.1"
 python-dotenv = "^0.15.0"
+flake8 = "^3.9.0"
 
 [tool.poetry.dev-dependencies]
 

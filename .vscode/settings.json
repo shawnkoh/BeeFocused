@@ -1,4 +1,7 @@
 {
     "python.venvPath": "~/Library/Caches/pypoetry/virtualenvs",
     "python.pythonPath": ".venv/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
 }
