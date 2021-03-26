@@ -19,7 +19,7 @@ LOG_DIRECTORY = os.path.expanduser("~/repos/BeeFocused/log.txt")
 # The Beeminder goal that you want to automatically update.
 GOAL = "test"
 
-# The log order produced by the bash scripts are not deterministic because Focus does not always execute the custom events in order.
+
 class Action(Enum):
     START = 0
     BREAK = 1
@@ -33,6 +33,9 @@ class Event(NamedTuple):
 
 
 events = []
+
+# Reformat the log because the order produced by the bash scripts are not
+# deterministic because Focus does not always execute the custom events in order.
 
 log_file = open(LOG_DIRECTORY)
 
