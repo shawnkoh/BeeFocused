@@ -1,3 +1,4 @@
+"""MacOS notification library."""
 import subprocess
 
 # Helper to display a notification on MacOS via AppleScript.
@@ -10,4 +11,5 @@ end run
 
 
 def notify(title, text):
+    """Pushes a notification to MacOS."""
     subprocess.call(["osascript", "-e", _CMD, title, text])

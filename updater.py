@@ -1,3 +1,4 @@
+"""Script that integrates Focus with Beeminder."""
 import os
 
 from enum import Enum
@@ -21,6 +22,8 @@ GOAL = "test"
 
 
 class Action(Enum):
+    """An Action describes the nature of an user event in Focus."""
+
     START = 0
     BREAK = 1
     UNBREAK = 2
@@ -28,6 +31,8 @@ class Action(Enum):
 
 
 class Event(NamedTuple):
+    """An event is a Focus event that occured."""
+
     action: Action
     timestamp: int
 
@@ -61,20 +66,20 @@ break_start_timestamp = 0
 break_duration = 0
 
 
-def started():
+def _started():
     return start_timestamp != 0
 
 
-def on_break():
+def _on_break():
     return break_start_timestamp != 0
 
 
-def work_duration():
+def _work_duration():
     return stop_timestamp - start_timestamp - break_duration
 
 
 for event in events:
-    if not started():
+    if not _started():
         if event.action == Action.START:
             start_timestamp = event.timestamp
         continue
@@ -87,15 +92,15 @@ for event in events:
         break_start_timestamp = event.timestamp
         continue
 
-    if on_break() and event.action == Action.UNBREAK:
+    if _on_break() and event.action == Action.UNBREAK:
         break_duration += event.timestamp - break_start_timestamp
         break_start_timestamp = 0
         continue
 
-if not started():
+if not _started():
     quit()
 
-duration = work_duration()
+duration = _work_duration()
 
 minutes, seconds = divmod(duration, 60)
 hours, minutes = divmod(minutes, 60)
