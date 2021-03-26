@@ -47,10 +47,10 @@ USERNAME=<Your Beeminder username>
 AUTH_TOKEN=<Your auth token>
 ```
 
-9. Open your terminal app and run ```poetry install```
+9. Open your terminal app and run ```poetry install --no-dev```
 # Developer Instructions
 
 ## VSCode Integration
 
-If you are using VSCode, you need to run ```poetry config virtualenvs.in-project true``` in your shell.
+If you are using VSCode, you need to run ```poetry install``` again to install development dependencies, and ```poetry config virtualenvs.in-project true``` in your shell.
 Afterwards, change your environment to the poetry instance.
