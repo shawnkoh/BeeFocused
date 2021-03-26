@@ -21,8 +21,10 @@ echo "start: "$(date +%s)"" > ~/repos/BeeFocused/log.txt
 
 Run this script when Focus **stops**
 ```
-echo "stop: "$(date +%s)"" >> ~/repos/BeeFocused/log.txt
-python3 ~/repos/BeeFocused/script.py
+export PATH=$PATH:~/.poetry/bin
+cd ~/repos/BeeFocused
+echo "stop: "$(date +%s)"" >> log.txt
+poetry run python updater.py
 ```
 
 Run this script when Focus **breaks**
