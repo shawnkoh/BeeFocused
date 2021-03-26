@@ -17,7 +17,7 @@ beeminder.auth_token = os.getenv("AUTH_TOKEN")
 # The location of where your log file should be.
 LOG_DIRECTORY = os.path.expanduser("~/repos/BeeFocused/log.txt")
 # The Beeminder goal that you want to automatically update.
-GOAL = "test"
+GOAL = "focus"
 
 
 class Action(Enum):
