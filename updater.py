@@ -2,7 +2,6 @@ import os
 
 from enum import Enum
 from typing import NamedTuple
-from operator import itemgetter
 
 import beeminder
 import notifier
@@ -27,9 +26,11 @@ class Action(Enum):
     UNBREAK = 2
     STOP = 3
 
+
 class Event(NamedTuple):
     action: Action
     timestamp: int
+
 
 events = []
 
@@ -48,7 +49,7 @@ log_file.close()
 events = set(events)
 
 # Sort by timestamp then action
-events = sorted(events, key = lambda event: (event.timestamp, event.action.value))
+events = sorted(events, key=lambda event: (event.timestamp, event.action.value))
 
 start_timestamp = 0
 stop_timestamp = 0
@@ -56,14 +57,18 @@ stop_timestamp = 0
 break_start_timestamp = 0
 break_duration = 0
 
+
 def started():
     return start_timestamp != 0
+
 
 def on_break():
     return break_start_timestamp != 0
 
+
 def work_duration():
     return stop_timestamp - start_timestamp - break_duration
+
 
 for event in events:
     if not started():
@@ -80,7 +85,7 @@ for event in events:
         continue
 
     if on_break() and event.action == Action.UNBREAK:
-        break_duration += (event.timestamp - break_start_timestamp)
+        break_duration += event.timestamp - break_start_timestamp
         break_start_timestamp = 0
         continue
 
@@ -96,4 +101,6 @@ value = duration / 60 / 60
 
 beeminder.create_datapoint(GOAL, value, "Auto-entered via BeeFocused")
 
-notifier.notify("BeeFocused", f"Focused for {hours}h {minutes}m {seconds}s. Uploaded to Beeminder.")
+notifier.notify(
+    "BeeFocused", f"Focused for {hours}h {minutes}m {seconds}s. Uploaded to Beeminder."
+)
