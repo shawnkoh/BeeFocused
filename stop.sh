@@ -1,3 +1,10 @@
+# Focus executes a custom shell script. Couldn't load poetry into PATH by sourcing profiles so manually add it here instead
+export PATH=$PATH:~/.poetry/bin
+
+# Poetry looks for the pyproject.toml in the current working directory.
+# CHANGEME
+cd ~/repos/BeeFocused
+
 echo "stop: "$(date +%s)"" >> log.txt
-# Was unable to execute the poetry binary in Focus's custom scripts so manually call it here instead.
-~/.poetry/bin/poetry run python ~/repos/BeeFocused/updater.py
+
+poetry run python updater.py

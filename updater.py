@@ -1,5 +1,4 @@
 import subprocess
-import requests
 import os
 
 from enum import Enum
