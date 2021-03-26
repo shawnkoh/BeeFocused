@@ -1,3 +1,9 @@
+# BeeFocused
+
+BeeFocused is a script that integrates [Focus](https://heyfocus.com/) with [Beeminder](https://www.beeminder.com/).
+
+It automatically sends the time you spent focused (excluding breaks) to Beeminder.
+
 # Installation Instructions
 
 1. Clone this repository
@@ -29,13 +35,22 @@ Run this script when Focus **unbreaks**
 echo "unbreak: "$(date +%s)"" >> ~/repos/BeeFocused/log.txt
 ```
 
-5. Update the directories in #4 to where you installed it.
+5. Update the directories in #4 to where you installed this.
 
-6. Update the directory in script.py to where you installed it.
+6. Update the LOG_DIRECTORY in updater.py to where you want your log file to be at.
 
-7. Run ```poetry install```
+7. Retrieve your auth token from https://www.beeminder.com/api/v1/auth_token.json
+
+8. Create a .env file in this folder with the following
+```
+USERNAME=<Your Beeminder username>
+AUTH_TOKEN=<Your auth token>
+```
+
+9. Open your terminal app and run ```poetry install```
+# Developer Instructions
 
 ## VSCode Integration
 
-If you're using VSCode, you need to run ```poetry config virtualenvs.in-project true``` in your shell.
+If you are using VSCode, you need to run ```poetry config virtualenvs.in-project true``` in your shell.
 Afterwards, change your environment to the poetry instance.
